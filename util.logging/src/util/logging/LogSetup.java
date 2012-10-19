@@ -1,15 +1,10 @@
 package util.logging;
 
-
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.SimpleFormatter;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
-
 
 
 public class LogSetup {
@@ -32,10 +27,5 @@ public class LogSetup {
 		LogManager.getLogManager().getLogger("").addHandler(ch);
 	}
 	
-	public void test() {
-		// -Djava.util.logging.config.file=logging.properties
-//		Properties p = System.getProperties();
-//		p.setProperty("java.util.logging.config.file", "logging.properties");		
-	}
 
 }

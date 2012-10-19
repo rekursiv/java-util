@@ -27,7 +27,7 @@ public class LogController extends Handler {
 			if (record.getThrown()!=null) {
 				logMsg.append(record.getThrown());
 			}
-			logMsg.append("\r\n");  //  TODO:  crossplatformatize  (line delimiter sys prop??)
+			logMsg.append("\n");
 			view.addLine(logMsg.toString());
 		}
 	}

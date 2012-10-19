@@ -1,19 +1,20 @@
 package util.logging;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Text;
 
 public class LogView extends Composite {
-	private Text txtLog;  //  TODO:  use StyledText and append() ??
+	private StyledText txtLog;
 
 	public LogView(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new FillLayout(SWT.HORIZONTAL));
 		
-		txtLog = new Text(this, SWT.BORDER | SWT.READ_ONLY | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL | SWT.MULTI);
+		txtLog = new StyledText(this, SWT.BORDER | SWT.READ_ONLY | SWT.H_SCROLL | SWT.V_SCROLL );
+		txtLog.setAlwaysShowScrollBars(false);
 
 	}
 
@@ -21,9 +22,8 @@ public class LogView extends Composite {
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				txtLog.setText(txtLog.getText()+line);
-				int numLines = txtLog.getLineCount();
-				txtLog.setTopIndex(numLines-1);
+				txtLog.append(line);
+				txtLog.setTopIndex(txtLog.getLineCount()-1);
 			}
 		});
 	}
