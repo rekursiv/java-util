@@ -88,19 +88,25 @@ public class ConfigManager<T> {
 		while (!errorStack.empty()) log.log(Level.SEVERE, "CONFIG", errorStack.pop());
 	}
 	
+	public void save(Object model) throws Exception {
+		saveToFile(defaultFileName, model);
+	}
+	
+	public void saveToFile(String fileName, Object model) throws Exception {
+//		System.out.println("save: "+fileName);
+		String txt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(model);
+		List<String> lines = Arrays.asList(txt.replace("\r", "").split("\\n"));
+		Files.write(buildPath(fileName), lines, StandardCharsets.UTF_8);
+	}
+	
+	
+	
 	
 	private Path buildPath(String fileName) {
 		String pathStr = System.getProperty("user.dir")+"/"+fileName;
 //		System.out.println(pathStr);
 		Path path = Paths.get(pathStr);
 		return path;
-	}
-	
-	private void saveToFile(String fileName, Object model) throws Exception {
-//		System.out.println("save: "+fileName);
-		String txt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(model);
-		List<String> lines = Arrays.asList(txt.replace("\r", "").split("\\n"));
-		Files.write(buildPath(fileName), lines, StandardCharsets.UTF_8);
 	}
 
 	private T loadFromFile(String fileName) throws Exception {
