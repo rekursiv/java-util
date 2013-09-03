@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ConfigManager<T> {
 
 	private String defaultFileName;
-	private ObjectMapper mapper;
+	private ObjectMapper mapper=null;
 	private Stack<Exception>  errorStack;
 	private Class<T> modelType;
 	
@@ -25,7 +25,6 @@ public class ConfigManager<T> {
 		this.modelType = modelType;
 		this.defaultFileName = defaultFileName;
 		errorStack= new Stack<Exception>();
-		mapper = new ObjectMapper();
 	}
 	
 	public ConfigBase createConfig() {
@@ -38,6 +37,7 @@ public class ConfigManager<T> {
 	}
 	
 	public T load() {
+		if (mapper==null) mapper = new ObjectMapper();
 		ConfigBase config = createConfig();
 		
 		if (!config.cfgUseDefaults) {
@@ -94,6 +94,7 @@ public class ConfigManager<T> {
 	
 	public void saveToFile(String fileName, Object model) throws Exception {
 //		System.out.println("save: "+fileName);
+		if (mapper==null) mapper = new ObjectMapper();
 		String txt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(model);
 		List<String> lines = Arrays.asList(txt.replace("\r", "").split("\\n"));
 		Files.write(buildPath(fileName), lines, StandardCharsets.UTF_8);
@@ -129,6 +130,7 @@ public class ConfigManager<T> {
 		}
 		System.out.println("--------------");
 		try {
+			if (mapper==null) mapper = new ObjectMapper();
 			System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj));
 		} catch (Exception e) {
 			e.printStackTrace();
