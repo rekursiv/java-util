@@ -19,6 +19,10 @@ public class ConsoleFormatter extends Formatter {
         builder.append(record.getSourceClassName()+"#");
         builder.append(record.getSourceMethodName()+"}  ");
         builder.append("\n");
+		if (record.getThrown()!=null) {
+			builder.append(record.getThrown());
+	        builder.append("\n");
+		}
 		return builder.toString();
 	}
 
