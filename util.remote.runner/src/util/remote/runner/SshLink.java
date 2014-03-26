@@ -81,11 +81,13 @@ public class SshLink {
 	
 	
 	private void killOldApp() throws Exception {
-		String res = execWatch("ps -ef | grep java");
+		String res = execWatch("ps -furoot | grep "+config.jarname);
 		if (res.contains(config.jarname)) {
+//			System.out.println(res);
 			System.out.println("Detected app running - it will now be shut down");
-			String psnum = res.substring(1, res.indexOf(" ?"));
-			exec("kill "+psnum);
+			String psnum = res.substring(4).trim().substring(0, res.indexOf(" ")+1);
+			System.out.println("Killing process "+psnum);
+			exec("sudo kill "+psnum);
 		}
 		Thread.sleep(2000);
 	}
@@ -94,7 +96,7 @@ public class SshLink {
 		System.out.println("Uploading new app...");
         final SFTPClient sftp = ssh.newSFTPClient();
         try {
-            sftp.put(new FileSystemFile(config.deploydir+"/"+config.jarname), ".");
+            sftp.put(new FileSystemFile(config.deploydir+"/"+config.jarname), config.remotedir);
         } finally {
             sftp.close();
         }
@@ -103,12 +105,16 @@ public class SshLink {
 	private void startNewGuiApp() throws Exception {
 		System.out.println("Starting new X app...");
 //		execWatch("env DISPLAY=:0 java -jar "+config.jarname+"&");
-		exec("ttyecho -n /dev/pts/0 env DISPLAY=:0 java -jar "+config.jarname);
+		execWatch("cd "+config.remotedir);
+		execWatch("sudo ttyecho -n /dev/pts/0 env DISPLAY=:0 java -jar "+config.jarname);
+		//  NOTE:  as root, exec:  cp /home/pi/.Xauthority /root
+		// AND compile ttyecho.c and copy to bin path
 	}
 
 	private void startNewConsoleApp() throws Exception {
 		System.out.println("Starting new console app...");
-		exec("ttyecho -n /dev/pts/0 java -jar "+config.jarname);
+		exec("cd "+config.remotedir);
+		exec("sudo ttyecho -n /dev/pts/0 java -jar "+config.jarname);
 	}
 	
 	private void logout() throws Exception {

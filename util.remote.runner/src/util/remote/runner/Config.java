@@ -8,6 +8,7 @@ public class Config extends ConfigBase {
 	public String deploydir = "C:/projects/eclipse_workspace/_deploy/test";
 	public String antscript = "makejar.xml";
 	public String jarname = "test.jar";
+	public String remotedir = ".";
 	public String remoteip = "192.168.1.42";
 	public String remoteun = "pi";
 	public String remotepw = "raspberry";
