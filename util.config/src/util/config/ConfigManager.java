@@ -16,10 +16,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ConfigManager<T> {
 
-	private String defaultFileName;
-	private ObjectMapper mapper=null;
-	private Stack<Exception>  errorStack;
-	private Class<T> modelType;
+	protected String defaultFileName;
+	protected ObjectMapper mapper=null;
+	protected Stack<Exception>  errorStack;
+	protected Class<T> modelType;
 	
 	public ConfigManager(Class<T> modelType, String defaultFileName) {
 		this.modelType = modelType;
@@ -94,14 +94,22 @@ public class ConfigManager<T> {
 	
 	public void saveToFile(String fileName, Object model) throws Exception {
 //		System.out.println("save: "+fileName);
-		if (mapper==null) mapper = new ObjectMapper();
-		String txt = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(model);
-		List<String> lines = Arrays.asList(txt.replace("\r", "").split("\\n"));
+		List<String> lines = Arrays.asList(getText(model).split("\\n"));
 		Files.write(buildPath(fileName), lines, StandardCharsets.UTF_8);
 	}
 	
+	public String getText(Object model) throws Exception {
+		if (mapper==null) mapper = new ObjectMapper();
+		return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(model).replace("\r", "");
+	}
 	
+	public void update(String text, Object model) throws Exception {
+		mapper.readerForUpdating(model).readValue(text);
+	}
 	
+	public T mapConfigFromText(String text) throws Exception {
+		return mapper.readValue(text, modelType);
+	}
 	
 	private Path buildPath(String fileName) {
 		String pathStr = System.getProperty("user.dir")+"/"+fileName;
@@ -137,5 +145,7 @@ public class ConfigManager<T> {
 		}
 		System.out.println("^^^^^^^^^^^^^^");
 	}
+
+
 	
 }
