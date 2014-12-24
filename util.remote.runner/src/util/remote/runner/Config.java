@@ -4,16 +4,15 @@ import util.config.ConfigBase;
 
 public class Config extends ConfigBase {
 
-	public String antbin = "C:/projects/eclipse/plugins/org.apache.ant_1.8.4.v201303080030/bin";
-	public String deploydir = "C:/projects/eclipse_workspace/_deploy/test";
+	public String antbin = "C:/projects/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/bin";
+	public String deploydir = "C:/projects/eclipse_workspace/_deploy/xtruder2";
 	public String antscript = "makejar.xml";
-	public String jarname = "test.jar";
-	public String remotedir = ".";
-	public String remoteip = "192.168.1.42";
-	public String remoteun = "pi";
-	public String remotepw = "raspberry";
-	
-	public boolean isGuiApp = false;
+	public String jarname = "xtruder2.jar";
+	public String remotedir = "xtruder2";
+	public String remoteip = "192.168.0.15";
+	public String remoteun = "protoplant";
+	public String remotepw = "asdf";
+	public boolean isGuiApp = true;
 	
 	
 }

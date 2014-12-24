@@ -26,8 +26,10 @@ public class SshLink {
 			login();
 			killOldApp();
 			upload();
-			if (config.isGuiApp) startNewGuiApp();
-			else startNewConsoleApp();
+//			if (config.isGuiApp) startNewGuiApp();
+//			else startNewConsoleApp();
+			startShellScript();
+			dumpLog();
 			logout();
 			System.out.println("Done.");
 			System.out.println("");
@@ -36,6 +38,8 @@ public class SshLink {
 		}
 
 	}
+
+
 
 	private void init() {
 		System.out.println("Starting SSH client...");
@@ -81,13 +85,14 @@ public class SshLink {
 	
 	
 	private void killOldApp() throws Exception {
-		String res = execWatch("ps -furoot | grep "+config.jarname);
+		String res = execWatch("ps -fu"+config.remoteun+" | grep \"[[:digit:]] java -jar "+config.jarname+"\"");
 		if (res.contains(config.jarname)) {
 //			System.out.println(res);
 			System.out.println("Detected app running - it will now be shut down");
-			String psnum = res.substring(4).trim().substring(0, res.indexOf(" ")+1);
-			System.out.println("Killing process "+psnum);
-			exec("sudo kill "+psnum);
+			int firstSpacePos = res.indexOf(" ");
+			String psnum = res.substring(firstSpacePos, res.indexOf(" ", firstSpacePos+4)).trim();
+			System.out.println("Killing process '"+psnum+"'");
+			exec("kill "+psnum);
 		}
 		Thread.sleep(2000);
 	}
@@ -102,11 +107,36 @@ public class SshLink {
         }
 	}
 	
+	private void dumpLog() throws Exception {
+		System.out.println("Will dump log file in five seconds...");
+		Thread.sleep(5000);
+		String res;
+		res = execWatch("cat runremote.log");
+		System.out.println("--- runremote.log begin ---");
+		System.out.println(res);
+		System.out.println("--- runremote.log end ---");
+	}
+
+	private void startShellScript() throws Exception {
+		System.out.println("Starting 'runremote.sh'");
+		exec("./runremote.sh&");
+	}
+
+	
+	
 	private void startNewGuiApp() throws Exception {
-		System.out.println("Starting new X app...");
-//		execWatch("env DISPLAY=:0 java -jar "+config.jarname+"&");
-		execWatch("cd "+config.remotedir);
-		execWatch("sudo ttyecho -n /dev/pts/0 env DISPLAY=:0 java -jar "+config.jarname);
+	
+//		String res;
+//		res = execWatch("./runremote.sh&");
+//		System.out.println("runremote.sh returned: '"+res+"'");
+		
+//		res = execWatch("pwd");
+//		System.out.println("'"+res+"'");
+		
+		
+//		res = execWatch("env DISPLAY=:0 java -jar "+config.jarname+"&");
+//		System.out.println("'"+res+"'");
+//		execWatch("sudo ttyecho -n /dev/pts/0 env DISPLAY=:0 java -jar "+config.jarname);
 		//  NOTE:  as root, exec:  cp /home/pi/.Xauthority /root
 		// AND compile ttyecho.c and copy to bin path
 	}
