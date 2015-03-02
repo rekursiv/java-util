@@ -10,9 +10,11 @@ public class Config extends ConfigBase {
 	public String jarname = "xtruder2.jar";
 	public String remotedir = "xtruder2";
 	public String remoteip = "192.168.0.15";
+	public int remoteport = 22;
 	public String remoteun = "protoplant";
 	public String remotepw = "asdf";
 	public boolean isGuiApp = true;
+
 	
 	
 }

@@ -56,7 +56,7 @@ public class SshLink {
 	
 	private void login() throws Exception {
 		System.out.println("Logging in...");
-		ssh.connect(config.remoteip);
+		ssh.connect(config.remoteip, config.remoteport);
 		ssh.authPassword(config.remoteun, config.remotepw);
 	}
 	
