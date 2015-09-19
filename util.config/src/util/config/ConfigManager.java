@@ -89,7 +89,9 @@ public class ConfigManager<T> {
 	}
 	
 	public void save(Object model) throws Exception {
-		saveToFile(defaultFileName, model);
+//		if (!Files.exists(buildPath(defaultFileName))) {
+			saveToFile(defaultFileName, model);
+//		}
 	}
 	
 	public void saveToFile(String fileName, Object model) throws Exception {
@@ -111,14 +113,14 @@ public class ConfigManager<T> {
 		return mapper.readValue(text, modelType);
 	}
 	
-	private Path buildPath(String fileName) {
+	public Path buildPath(String fileName) {
 		String pathStr = System.getProperty("user.dir")+"/"+fileName;
 //		System.out.println(pathStr);
 		Path path = Paths.get(pathStr);
 		return path;
 	}
 
-	private T loadFromFile(String fileName) throws Exception {
+	public T loadFromFile(String fileName) throws Exception {
 //		System.out.println("load: "+fileName);
 		StringBuilder sb = new StringBuilder();
 		for (String line : Files.readAllLines(buildPath(fileName), StandardCharsets.UTF_8)) {

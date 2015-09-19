@@ -28,6 +28,10 @@ public class LogView extends Composite {
 		});
 	}
 	
+	public StyledText getTextWidget() {
+		return txtLog;
+	}
+	
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
