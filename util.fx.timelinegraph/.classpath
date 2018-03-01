@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/util.config"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/fx-guice-8.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/guava-19.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/guice-4.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/jackson-annotations-2.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/jackson-core-2.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/jackson-databind-2.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/javax.inject-1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/util.logging.console"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/controlsfx-8.40.14/controlsfx-8.40.14.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
