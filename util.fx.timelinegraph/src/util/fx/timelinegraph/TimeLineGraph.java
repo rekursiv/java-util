@@ -56,12 +56,14 @@ public class TimeLineGraph {
 		yAxis.setAutoRanging(false);
 		yAxis.setLowerBound(yLowerBound);
 		yAxis.setUpperBound(yUpperBound);
+		yAxis.setTickMarkVisible(false);   /// ??
+		yAxis.setMinorTickVisible(false);   /// ??
 		
 		chart = new LineChart<Number, Number>(timeAxis, yAxis);
 		chart.setCreateSymbols(false);
 		chart.setAnimated(false);
 		chart.setHorizontalZeroLineVisible(false);
-//		chart.setHorizontalGridLinesVisible(false);
+		chart.setHorizontalGridLinesVisible(false);  /// ???
 		chart.setVerticalGridLinesVisible(false);
 		root.getChildren().add(chart);
 		VBox.setVgrow(chart, Priority.ALWAYS);
@@ -97,6 +99,18 @@ public class TimeLineGraph {
 	
 	public Node getRoot() {
 		return root;
+	}
+	
+	public LineChart<Number, Number> getChart() {
+		return chart;
+	}
+	
+	public NumberAxis getTimeAxis() {
+		return timeAxis;
+	}
+	
+	public NumberAxis getYAxis() {
+		return yAxis;
 	}
 	
 	public void addSeries(String title) {
