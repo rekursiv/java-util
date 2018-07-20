@@ -15,7 +15,7 @@ import com.google.inject.spi.TypeListener;
 
 import util.logging.console.ConsoleFormatter;
 
-public class TemplateGuice extends AbstractModule {
+public class TemplateGuice_Minimal extends AbstractModule {
 
 	protected final EventBus eventBus = new EventBus();
 	
