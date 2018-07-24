@@ -1,4 +1,4 @@
-package util.fx.spinner;
+package util.fx.entry;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
