@@ -3,6 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/util.config"/>
-	<classpathentry kind="src" path="/sshj"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/sshj/bcprov-jdk15on-160.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/sshj/eddsa-0.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/sshj/sshj-0.26.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
