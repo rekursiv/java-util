@@ -14,8 +14,8 @@ public class RootController {
 
 	@Inject private Logger log;
 	
-	@Inject private MultiSeriesTest test;
-//	@Inject private MultiGraphTest test;
+//	@Inject private MultiSeriesTest test;
+	@Inject private MultiGraphTest test;
 	
 	
 	@FXML private StackPane spGraph;

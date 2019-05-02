@@ -16,6 +16,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -23,9 +24,9 @@ import javafx.scene.shape.Line;
 
 public class TimeLineGraphSet {
 
-	private static final int STARTING_TIME_VIEW_WIDTH = 300;	// 30 seconds at 10hz data rate
-//	private static final int MAX_CHART_DATA = 600;				// 1 minute at 10hz data rate
-	private static final int MAX_CHART_DATA = 1800;				// 3 minutes at 10hz data rate
+	private static final int DEFAULT_STARTING_TIME_VIEW_WIDTH = 300;	// 30 seconds at 10hz data rate
+//	private static final int DEFAULT_MAX_CHART_DATA = 600;				// 1 minute at 10hz data rate
+	private static final int DEFAULT_MAX_CHART_DATA = 1800;				// 3 minutes at 10hz data rate
 	
 	@Inject protected Logger log;
 	
@@ -35,6 +36,9 @@ public class TimeLineGraphSet {
 //	protected LineChart<Number, Number> chart;
 //	protected NumberAxis timeAxis = new NumberAxis();
 //	protected NumberAxis yAxis = new NumberAxis();
+	
+	protected int startingTimeViewWidth;
+	protected int maxChartData;
 	
 	protected int timeIndex = 0;
 //	protected int curDataSize = 0;
@@ -48,26 +52,29 @@ public class TimeLineGraphSet {
 	}
 	
 	public void init(float yLowerBound, float yUpperBound, String timeAxisTitle) {	
+		init(yLowerBound, yUpperBound, timeAxisTitle, DEFAULT_STARTING_TIME_VIEW_WIDTH, DEFAULT_MAX_CHART_DATA);
+	}
+	
+	public void init(float yLowerBound, float yUpperBound, String timeAxisTitle, int startingTimeViewWidth, int maxChartData) {	
+		this.startingTimeViewWidth = startingTimeViewWidth;
+		this.maxChartData = maxChartData;
 
-		rootGraph.init(yLowerBound, yUpperBound, STARTING_TIME_VIEW_WIDTH, timeAxisTitle);
+		rootGraph.init(yLowerBound, yUpperBound, startingTimeViewWidth, timeAxisTitle);
 		root.getChildren().add(rootGraph.getChart());
 
 				
 		rsTimeRange.setMin(0);
 		rsTimeRange.setLowValue(0);
-		rsTimeRange.setMax(STARTING_TIME_VIEW_WIDTH);
-		rsTimeRange.setHighValue(STARTING_TIME_VIEW_WIDTH);
+		rsTimeRange.setMax(startingTimeViewWidth);
+		rsTimeRange.setHighValue(startingTimeViewWidth);
 		
 		rsTimeRange.lowValueProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> obs, Number oldValue, Number newValue) {
-				rootGraph.getTimeAxis().setLowerBound(newValue.intValue());
-				if (root.getChildren().size()>2) {
-					for (int i=0; i<root.getChildren().size()-1; ++i) {
-						getGraph(i).getTimeAxis().setLowerBound(newValue.intValue());
-					}
+				for (int i=0; i<root.getChildren().size()-1; ++i) {
+					getGraph(i).getTimeAxis().setLowerBound(newValue.intValue());
 				}
-				if (newValue.intValue()==timeIndex-MAX_CHART_DATA) followTimeTail = true;
+				if (newValue.intValue()==timeIndex-maxChartData) followTimeTail = true;
 				else followTimeTail = false;
 //				log.info(newValue.intValue()+"   "+(timeIndex-MAX_CHART_DATA));
 			}
@@ -76,11 +83,8 @@ public class TimeLineGraphSet {
 		rsTimeRange.highValueProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> obs, Number oldValue, Number newValue) {
-				rootGraph.getTimeAxis().setUpperBound(newValue.intValue());
-				if (root.getChildren().size()>2) {
-					for (int i=0; i<root.getChildren().size()-1; ++i) {
-						getGraph(i).getTimeAxis().setUpperBound(newValue.intValue());
-					}
+				for (int i=0; i<root.getChildren().size()-1; ++i) {
+					getGraph(i).getTimeAxis().setUpperBound(newValue.intValue());
 				}
 				if (newValue.intValue()<timeIndex) followTimeHead = false;
 				else followTimeHead = true;
@@ -89,13 +93,12 @@ public class TimeLineGraphSet {
         });
 		
 		root.getChildren().add(rsTimeRange);
-		
 	}
 	
 	// adds graph on TOP
 	public void addGraph(float yLowerBound, float yUpperBound) {
 		TimeLineGraph graph = new TimeLineGraph();
-		graph.init(yLowerBound, yUpperBound, STARTING_TIME_VIEW_WIDTH, null);
+		graph.init(yLowerBound, yUpperBound, startingTimeViewWidth, null);
 		root.getChildren().add(0, graph.getChart());
 	}
 	
@@ -111,7 +114,31 @@ public class TimeLineGraphSet {
 	}
 	
 	public int getMaxChartData() {
-		return MAX_CHART_DATA;
+		return maxChartData;
+	}
+	
+	public void setViewWidth(int viewWidth) {
+		for (int i=0; i<root.getChildren().size()-1; ++i) {
+			getGraph(i).getTimeAxis().setLowerBound(0);
+			getGraph(i).getTimeAxis().setUpperBound(viewWidth);
+		}
+		rsTimeRange.setMax(viewWidth);
+		rsTimeRange.setHighValue(viewWidth);
+	}
+	
+	public void setMaxChartData(int maxChartData) {
+		this.maxChartData = maxChartData;
+	}
+	
+	//  FIXME:  throws exception
+//	public void clearData(int graphIndex) {
+//		for (Series<Number, Number> s : getGraph(graphIndex).getChart().getData()) {
+//			s.getChart().getData().clear();
+//		}
+//	}
+	
+	public void setTimeIndex(int index) {
+		this.timeIndex = index;
 	}
 	
 	///////////////
@@ -139,9 +166,9 @@ public class TimeLineGraphSet {
 	public void addData(int seriesIndex, Number data) {
 		addDataRaw(seriesIndex, data);
 		int curDataSize = rootGraph.getChart().getData().get(seriesIndex).getData().size();
-        if (curDataSize > MAX_CHART_DATA) {
-        	rootGraph.getChart().getData().get(seriesIndex).getData().remove(0, curDataSize-MAX_CHART_DATA);
-        	curDataSize =  MAX_CHART_DATA;
+        if (curDataSize > maxChartData) {
+        	rootGraph.getChart().getData().get(seriesIndex).getData().remove(0, curDataSize-maxChartData);
+        	curDataSize =  maxChartData;
         }
 	}
 	
@@ -160,9 +187,9 @@ public class TimeLineGraphSet {
 	public void addData(int graphIndex, int seriesIndex, Number data) {
 		addDataRaw(graphIndex, seriesIndex, data);
 		int curDataSize = getGraph(graphIndex).getChart().getData().get(seriesIndex).getData().size();
-        if (curDataSize > MAX_CHART_DATA) {
-        	getGraph(graphIndex).getChart().getData().get(seriesIndex).getData().remove(0, curDataSize-MAX_CHART_DATA);
-        	curDataSize =  MAX_CHART_DATA;
+        if (curDataSize > maxChartData) {
+        	getGraph(graphIndex).getChart().getData().get(seriesIndex).getData().remove(0, curDataSize-maxChartData);
+        	curDataSize =  maxChartData;
         }
 	}
 	
@@ -180,7 +207,7 @@ public class TimeLineGraphSet {
 	public int advanceFrame() {
 		++timeIndex;
 		if (timeIndex>rsTimeRange.getMax()) {
-			if (timeIndex-MAX_CHART_DATA>0) rsTimeRange.setMin(timeIndex-MAX_CHART_DATA);
+			if (timeIndex-maxChartData>0) rsTimeRange.setMin(timeIndex-maxChartData);
 			else rsTimeRange.setMin(0);
 			rsTimeRange.setMax(timeIndex);
 			if (followTimeHead) {
@@ -189,7 +216,7 @@ public class TimeLineGraphSet {
 				rsTimeRange.setLowValue(timeIndex-range);				
 			} else if (followTimeTail) {
 				int range = (int)(rsTimeRange.getHighValue()-rsTimeRange.getLowValue());
-				rsTimeRange.setHighValue((timeIndex-MAX_CHART_DATA)+range+1);
+				rsTimeRange.setHighValue((timeIndex-maxChartData)+range+1);
 			}
 //			log.info((timeIndex-defaultTimeViewWidth)+"  "+timeIndex);
 		}

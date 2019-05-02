@@ -49,6 +49,7 @@ public class TimeLineGraph {
 		yAxis.setMinorTickVisible(false);   /// ??
 		
 		chart = new LineChart<Number, Number>(timeAxis, yAxis);
+		chart.setAnimated(false);
 		chart.setCreateSymbols(false);
 		chart.setAnimated(false);
 		chart.setHorizontalZeroLineVisible(false);
