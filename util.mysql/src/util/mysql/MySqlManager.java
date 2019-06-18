@@ -4,13 +4,16 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class MySqlManager implements Closeable {
 	
 	@Inject protected Logger log;
@@ -32,6 +35,13 @@ public class MySqlManager implements Closeable {
 		}
 	}
 
+	public PreparedStatement prepareStatement(String q) throws SQLException {
+		con = DriverManager.getConnection(url, un, pw);
+		PreparedStatement p = con.prepareStatement(q);
+		stmt = p;
+		return p;
+	}
+	
 	public ResultSet query(String q) throws SQLException {
 		con = DriverManager.getConnection(url, un, pw);
 		stmt = con.createStatement();
@@ -44,6 +54,10 @@ public class MySqlManager implements Closeable {
 		}
 	}
 	
+	public Connection getConnection() throws SQLException {
+		con = DriverManager.getConnection(url, un, pw);
+		return con;
+	}
 
 	@Override
 	public void close() throws IOException {
