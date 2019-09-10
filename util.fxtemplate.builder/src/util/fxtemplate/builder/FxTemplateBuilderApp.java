@@ -9,13 +9,13 @@ import java.nio.file.Paths;
 public class FxTemplateBuilderApp {
 	private static final boolean enabled = false;
 	
-	private static final String filePrefix = "NewProject";
+	private static final String filePrefix = "DmScreen";
 	
-//	private static final String packageName = "com.protoplant.";
-//	private static final String destFolder = "../../protoplant_java";
+	private static final String packageName = "com.protoplant.dm.screen";
+	private static final String destFolder = "../../protoplant_java/";
 
-	private static final String packageName = "prj.new";
-	private static final String destFolder = "../../prj/";
+//	private static final String packageName = "prj.fuguelooper";
+//	private static final String destFolder = "../../prj/";
 	
 	private static FxTemplateBuilderApp instance = null;
 

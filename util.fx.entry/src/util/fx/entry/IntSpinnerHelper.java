@@ -7,7 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Spinner;
 
 
-public class IntSpinnerHelper  implements ChangeListener<Integer> {
+public class IntSpinnerHelper implements ChangeListener<Integer> {
 	private Spinner<Integer> spinner;
 	private BiConsumer<Integer, Boolean> onChange;
 	private boolean send = true;
