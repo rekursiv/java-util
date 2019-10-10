@@ -8,6 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX_11"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/util.config"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/util.logging.console"/>
 	<classpathentry kind="lib" path="C:/projects/javalib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="C:/projects/javalib/fx-guice-8.0.0.jar"/>
 	<classpathentry kind="lib" path="C:/projects/javalib/guava-19.0.jar"/>
@@ -16,6 +17,5 @@
 	<classpathentry kind="lib" path="C:/projects/javalib/jackson-core-2.7.0.jar"/>
 	<classpathentry kind="lib" path="C:/projects/javalib/jackson-databind-2.7.0.jar"/>
 	<classpathentry kind="lib" path="C:/projects/javalib/javax.inject-1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/util.logging.console"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

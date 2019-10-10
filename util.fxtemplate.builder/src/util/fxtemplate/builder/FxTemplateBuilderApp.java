@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 public class FxTemplateBuilderApp {
 	private static final boolean enabled = false;
 	
-	private static final String filePrefix = "DmScreen";
+	private static final String filePrefix = "DmDataView";
 	
-	private static final String packageName = "com.protoplant.dm.screen";
+	private static final String packageName = "com.protoplant.dm.dataview";
 	private static final String destFolder = "../../protoplant_java/";
 
 //	private static final String packageName = "prj.fuguelooper";
