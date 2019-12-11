@@ -1,13 +1,11 @@
 package util.mysql;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Logger;
 
 import com.google.inject.Inject;
@@ -22,7 +20,6 @@ public class MySqlManager implements Closeable {
 	protected String un = null;
 	protected String pw = null;
 	protected Connection con = null;
-	protected Statement stmt = null;
 	
 	public void init(String url, String un, String pw) {
 		this.url = url;
@@ -33,37 +30,37 @@ public class MySqlManager implements Closeable {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
 
-	public PreparedStatement prepareStatement(String q) throws SQLException {
+	}
+	
+	public void open() throws SQLException {
 		con = DriverManager.getConnection(url, un, pw);
-		PreparedStatement p = con.prepareStatement(q);
-		stmt = p;
-		return p;
+	}
+	
+	public PreparedStatement prepareStatement(String q) throws SQLException {
+		return con.prepareStatement(q);
 	}
 	
 	public ResultSet query(String q) throws SQLException {
-		con = DriverManager.getConnection(url, un, pw);
-		stmt = con.createStatement();
-		return stmt.executeQuery(q);
+		return con.createStatement().executeQuery(q);
 	}
 	
 	public int update(String q) throws SQLException {
-		try (Connection c = DriverManager.getConnection(url, un, pw)) {
-			return c.createStatement().executeUpdate(q);
-		}
+		return con.createStatement().executeUpdate(q);
+	}
+
+	public Connection getConnection() throws SQLException {
+		return con;
 	}
 	
-	public Connection getConnection() throws SQLException {
-		con = DriverManager.getConnection(url, un, pw);
-		return con;
+	public Connection getNewConnection() throws SQLException {
+		return DriverManager.getConnection(url, un, pw);
 	}
 
 	@Override
-	public void close() throws IOException {
+	public void close() {
 		if (con!=null) try { con.close(); } catch (SQLException e) {}	
 		con=null;
-		stmt=null;
 	}
 
 }
