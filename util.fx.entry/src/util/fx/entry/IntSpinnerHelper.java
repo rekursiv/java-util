@@ -34,5 +34,8 @@ public class IntSpinnerHelper implements ChangeListener<Integer> {
 		this.send = true;
 	}
 
+	public void setSend(boolean send) {
+		this.send = send;
+	}
 	
 }
