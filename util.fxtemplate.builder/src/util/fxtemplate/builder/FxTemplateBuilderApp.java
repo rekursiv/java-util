@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 public class FxTemplateBuilderApp {
 	private static final boolean enabled = false;
 	
-	private static final String filePrefix = "DmDataView";
+	private static final String filePrefix = "Dearify";
 	
-	private static final String packageName = "com.protoplant.dm.dataview";
+	private static final String packageName = "com.protoplant.dearify";
 	private static final String destFolder = "../../protoplant_java/";
 
 //	private static final String packageName = "prj.fuguelooper";
@@ -63,6 +63,7 @@ public class FxTemplateBuilderApp {
 		
 		copyAndReplacePackageNameInSrc("Root.fxml");
 		copyAndReplacePackageNameInSrc("RootController.java");
+		copyAndReplacePackageNameInSrc("TemplateLaunch.java", filePrefix+"Launch.java");
 		copyAndReplacePackageNameInSrc("TemplateApp.java", filePrefix+"App.java");
 		copyAndReplacePackageNameInSrc("TemplateGuice.java", filePrefix+"Guice.java");
 		copyAndReplacePackageNameInSrc("TemplateConfig.java", filePrefix+"Config.java");

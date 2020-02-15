@@ -8,6 +8,7 @@ open Root.fxml and rename package in under fx:controller
 run Eclipse and import "Existing" project (with copy checkbox cleared)
 in Eclipse, using refactoring:
 	rename package
+	rename TemplateLaunch.java
 	rename TemplateApp.java
 	rename TemplateConfig.java
 	rename TemplateGuice.java
