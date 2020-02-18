@@ -35,7 +35,5 @@ public class TemplateApp extends GuiceApplication {
 		}
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+
 }
