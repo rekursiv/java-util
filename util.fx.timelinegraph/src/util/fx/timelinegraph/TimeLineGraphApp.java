@@ -28,7 +28,7 @@ public class TimeLineGraphApp extends GuiceApplication {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("TimeLineGraph");
+			primaryStage.setTitle("TimeLineGraph v1.0");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -62,11 +62,7 @@ public class TimeLineGraphSet {
 		rootGraph.init(yLowerBound, yUpperBound, startingTimeViewWidth, timeAxisTitle);
 		root.getChildren().add(rootGraph.getChart());
 
-				
-		rsTimeRange.setMin(0);
-		rsTimeRange.setLowValue(0);
-		rsTimeRange.setMax(startingTimeViewWidth);
-		rsTimeRange.setHighValue(startingTimeViewWidth);
+		resetRange();
 		
 		rsTimeRange.lowValueProperty().addListener(new ChangeListener<Number>() {
 			@Override
@@ -115,6 +111,13 @@ public class TimeLineGraphSet {
 	
 	public int getMaxChartData() {
 		return maxChartData;
+	}
+	
+	public void resetRange() {
+		rsTimeRange.setMin(0);
+		rsTimeRange.setLowValue(0);
+		rsTimeRange.setMax(startingTimeViewWidth);
+		rsTimeRange.setHighValue(startingTimeViewWidth);
 	}
 	
 	public void setViewWidth(int viewWidth) {
