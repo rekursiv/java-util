@@ -65,9 +65,9 @@ public class ConfigManager<T> {
 			
 			if (config.cfgSaveToFile!=null) {
 				String fileName = config.cfgSaveToFile;
-//				if (fileName.isEmpty()) {  // this would overwrite cfg file, but prob. better to delete manually if update needed
-//					fileName = defaultFileName;
-//				}
+				if (fileName.isEmpty()) {  // use empty string to update current cfg file with new vars added to config class
+					fileName = defaultFileName;
+				}
 				config.cfgSaveToFile = null;
 				try {
 					saveToFile(fileName, config);
