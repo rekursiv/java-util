@@ -3,9 +3,9 @@ copy and rename template dir
 delete everything in bin dir
 open .project and change <name> tag
 open build.fxbuild and change <application> tag
+run Eclipse and import "Existing" project (with copy checkbox cleared)
 open Root.fxml and rename package in under fx:controller
 (optional) open TemplateGuice.java, rename log and config file names
-run Eclipse and import "Existing" project (with copy checkbox cleared)
 in Eclipse, using refactoring:
 	rename package
 	rename TemplateLaunch.java
