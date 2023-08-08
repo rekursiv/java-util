@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX_11"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/fx-guice-8.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/guava-19.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/jackson-annotations-2.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/jackson-core-2.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/jackson-databind-2.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/guice-4.0.jar"/>
+	<classpathentry kind="lib" path="C:/projects/javalib/controlsfx-11.0.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/util.logging.console"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/util.config"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/chartfx-chart"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/chartfx-dataset"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

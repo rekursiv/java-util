@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 public class FxTemplateBuilderApp {
 	private static final boolean enabled = false;
 	
-	private static final String filePrefix = "Workflow";
+	private static final String filePrefix = "DbBackup";
 	
-	private static final String packageName = "com.protoplant.workflow";
+	private static final String packageName = "com.protoplant.db.backup";
 	private static final String destFolder = "../../protoplant_java/";
 
 //	private static final String packageName = "prj.statictester";

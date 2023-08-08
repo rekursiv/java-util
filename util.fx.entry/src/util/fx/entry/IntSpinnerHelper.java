@@ -21,7 +21,7 @@ public class IntSpinnerHelper implements ChangeListener<Integer> {
 	
 	@Override
 	public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-		onChange.accept(newValue.intValue(), send);
+		if (onChange!=null) onChange.accept(newValue.intValue(), send);
 	}
 
 	public void setValue(int value) {

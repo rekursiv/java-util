@@ -1,0 +1,10 @@
+shut down Eclipse
+copy and rename project dir
+delete everything in bin dir
+run Eclipse and import "Existing" project (with copy checkbox cleared)
+use "file search" to do a global search-and-replace of base package name
+
+
+(optional) open XXXGuice.java, rename log and config file names
+
+

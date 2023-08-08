@@ -1,0 +1,10 @@
+
+
+
+
+
+
+========================
+
+	protected ConcurrentLinkedDeque<Number> deq = new ConcurrentLinkedDeque<Number>();
+
