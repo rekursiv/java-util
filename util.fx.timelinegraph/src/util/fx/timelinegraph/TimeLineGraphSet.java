@@ -207,8 +207,12 @@ public class TimeLineGraphSet {
 		rsTimeRange.setLowValue(start);
 	}
 	
-	public int advanceFrame() {
+	public void incTimeIndex() {
 		++timeIndex;
+	}
+	
+	public int advanceFrame() {
+		incTimeIndex();
 		if (timeIndex>rsTimeRange.getMax()) {
 			if (timeIndex-maxChartData>0) rsTimeRange.setMin(timeIndex-maxChartData);
 			else rsTimeRange.setMin(0);
