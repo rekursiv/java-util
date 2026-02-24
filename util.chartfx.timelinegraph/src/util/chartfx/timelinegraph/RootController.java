@@ -17,7 +17,7 @@ public class RootController {
 //	@Inject private MultiSeriesTest test;
 //	@Inject private MultiGraphTest test;
 	
-	@Inject private Test1 test;
+//	@Inject private Test1 test;
 	
 	@FXML private StackPane spGraph;
 	
@@ -28,14 +28,14 @@ public class RootController {
 //		spGraph.getChildren().add(test.getGraph().getRoot());
 //		test.init();
 
-		test.init();
-		spGraph.getChildren().add(test.getChart());
+//		test.init();
+//		spGraph.getChildren().add(test.getChart());
 
 	}
 	
 	@FXML
 	public void onTest() {
-		test.onTest();
+//		test.onTest();
 	}
 	
 

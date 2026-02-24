@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="util/chartfx/timelinegraph/Test1.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -18,7 +18,5 @@
 	<classpathentry kind="lib" path="C:/projects/javalib/controlsfx-11.0.1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/util.logging.console"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/util.config"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/chartfx-chart"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/chartfx-dataset"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
