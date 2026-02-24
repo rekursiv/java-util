@@ -9,12 +9,12 @@ import java.nio.file.Paths;
 public class FxTemplateBuilderApp {
 	private static final boolean enabled = false;
 	
-	private static final String filePrefix = "DbBackup";
+	private static final String filePrefix = "PastaView";
 	
-	private static final String packageName = "com.protoplant.db.backup";
+	private static final String packageName = "com.protoplant.pastaview";
 	private static final String destFolder = "../../protoplant_java/";
 
-//	private static final String packageName = "prj.statictester";
+//	private static final String packageName = "prj.meshcore.benchmark";
 //	private static final String destFolder = "../../prj/";
 	
 	private static FxTemplateBuilderApp instance = null;
