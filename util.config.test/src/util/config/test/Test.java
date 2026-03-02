@@ -1,5 +1,6 @@
 package util.config.test;
-import com.google.inject.Inject;
+
+import javax.inject.Inject;
 
 public class Test {
 	
