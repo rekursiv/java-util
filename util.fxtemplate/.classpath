@@ -10,7 +10,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/util.logging.console"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/GuiceGuava"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jackson"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX_25_Win"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX_25"/>
 	<classpathentry kind="var" path="JAVALIB/fx-guice-8.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
