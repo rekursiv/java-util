@@ -6,7 +6,15 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/util.config"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/GuiceGuava"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/GuiceGuava">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/util.config">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

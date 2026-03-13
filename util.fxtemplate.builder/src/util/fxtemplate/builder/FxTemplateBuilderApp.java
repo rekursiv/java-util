@@ -63,7 +63,6 @@ public class FxTemplateBuilderApp {
 		
 		copyAndReplacePackageNameInSrc("Root.fxml");
 		copyAndReplacePackageNameInSrc("RootController.java");
-		copyAndReplacePackageNameInSrc("TemplateLaunch.java", filePrefix+"Launch.java");
 		copyAndReplacePackageNameInSrc("TemplateApp.java", filePrefix+"App.java");
 		copyAndReplacePackageNameInSrc("TemplateGuice.java", filePrefix+"Guice.java");
 		copyAndReplacePackageNameInSrc("TemplateConfig.java", filePrefix+"Config.java");

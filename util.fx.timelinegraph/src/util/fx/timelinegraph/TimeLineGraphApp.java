@@ -1,5 +1,6 @@
 package util.fx.timelinegraph;
 	
+import java.awt.SplashScreen;
 import java.util.List;
 
 import com.cathive.fx.guice.GuiceApplication;
@@ -36,6 +37,9 @@ public class TimeLineGraphApp extends GuiceApplication {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		GuiceApplication.launch(TimeLineGraphApp.class);
+		if (SplashScreen.getSplashScreen()!=null) SplashScreen.getSplashScreen().close();
+		System.out.println("END main()");
+		System.exit(0);
 	}
 }
