@@ -8,6 +8,8 @@ import com.cathive.fx.guice.GuiceFXMLLoader;
 import com.google.inject.Inject;
 import com.google.inject.Module;
 
+import it.sauronsoftware.junique.AlreadyLockedException;
+import it.sauronsoftware.junique.JUnique;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -39,7 +41,14 @@ public class TemplateApp extends GuiceApplication {
 	}
 	
 	public static void main(String[] args) {
-		GuiceApplication.launch(TemplateApp.class);
+		Class<TemplateApp> appClass = TemplateApp.class;
+		try {
+			JUnique.acquireLock(appClass.getName());
+			GuiceApplication.launch(appClass);
+		} catch (AlreadyLockedException e) {
+			System.out.println("Another instance of "+appClass.getName()+" was detected, shutting down.");
+		}
+		if (SplashScreen.getSplashScreen()!=null) SplashScreen.getSplashScreen().close();
 		System.out.println("END main()");
 		System.exit(0);
 	}

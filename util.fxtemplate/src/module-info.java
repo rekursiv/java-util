@@ -16,6 +16,7 @@ module util.fxtemplate {
 	requires transitive javafx.graphics;
 	requires transitive util.config;
 	requires transitive util.logging.console;
+	requires junique;
 	
 
 }
