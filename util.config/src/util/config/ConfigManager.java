@@ -27,6 +27,10 @@ public class ConfigManager<T> {
 		errorStack= new Stack<Exception>();
 	}
 	
+	public boolean hasErrors() {
+		return !errorStack.isEmpty();
+	}
+	
 	public ConfigBase createConfig() {
 		try {
 			return (ConfigBase) modelType.newInstance();

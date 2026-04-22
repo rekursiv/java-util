@@ -13,6 +13,17 @@ public class DbManager {
 	protected CouchDbInstance dbInst = null;
 	protected CouchDbConnector dbCon = null;
 	
+	
+	public void setup(String hostIp, String dbName) throws Exception {
+		this.hostIp = hostIp;
+		dbCon = null;
+		
+		System.getProperties().setProperty("org.ektorp.support.AutoUpdateViewOnChange", "true");
+		dbInst = new StdCouchDbInstance(new StdHttpClient.Builder().host(hostIp).build());
+		
+		dbCon = new StdCouchDbConnector(dbName, dbInst);
+	}
+	
 	public void init(String hostIp, String dbName) throws Exception {
 		this.hostIp = hostIp;
 		dbCon = null;
@@ -37,6 +48,10 @@ public class DbManager {
 	public CouchDbConnector getDb() {
 		return dbCon;
 	}
+	
+	public CouchDbInstance getInst() {
+		return dbInst;
+	}
 
 	public String getUrlForWebView(CouchDbConnector con, String id) {
 		StringBuilder url = new StringBuilder();
@@ -50,7 +65,7 @@ public class DbManager {
 		return url.toString();
 	}
 	
-	protected void initRepos() throws Exception {
+	public void initRepos() throws Exception {
 		
 	}
 	
