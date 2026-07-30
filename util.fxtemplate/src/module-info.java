@@ -3,6 +3,7 @@ module util.fxtemplate {
 	exports util.fxtemplate;
 	opens util.fxtemplate;
 
+	requires junique;
 	requires transitive com.fasterxml.jackson.annotation;
 	requires transitive com.google.common;
 	requires transitive com.google.guice;
@@ -16,7 +17,6 @@ module util.fxtemplate {
 	requires transitive javafx.graphics;
 	requires transitive util.config;
 	requires transitive util.logging.console;
-	requires junique;
 	
 
 }

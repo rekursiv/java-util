@@ -9,13 +9,13 @@ import java.nio.file.Paths;
 public class FxTemplateBuilderApp {
 	private static final boolean enabled = false;
 	
-	private static final String filePrefix = "PastaView";
+	private static final String filePrefix = "Test";
 	
-	private static final String packageName = "com.protoplant.pastaview";
-	private static final String destFolder = "../../protoplant_java/";
+//	private static final String packageName = "com.protoplant.mixer";
+//	private static final String destFolder = "../../protoplant_java/";
 
-//	private static final String packageName = "prj.meshcore.benchmark";
-//	private static final String destFolder = "../../prj/";
+	private static final String packageName = "prj.test";
+	private static final String destFolder = "../../prj/";
 	
 	private static FxTemplateBuilderApp instance = null;
 
@@ -59,7 +59,8 @@ public class FxTemplateBuilderApp {
 		
 		copyInPrj(".classpath");
 		copyInPrj("todo.txt");
-		
+
+		copyAndReplacePackageNameInPrj("src/module-info.java");
 		
 		copyAndReplacePackageNameInSrc("Root.fxml");
 		copyAndReplacePackageNameInSrc("RootController.java");
