@@ -4,10 +4,11 @@ module util.fxtemplate {
 	opens util.fxtemplate;
 
 	requires junique;
+	requires java.inject;
 	requires transitive com.fasterxml.jackson.annotation;
-	requires transitive com.google.common;
-	requires transitive com.google.guice;
-	requires transitive fx.guice;
+	requires com.google.common;
+	requires com.google.guice;
+	requires transitive com.cathive.fx.guice;
 	requires transitive jakarta.inject;
 	requires transitive java.desktop;
 	requires transitive java.logging;
@@ -17,6 +18,5 @@ module util.fxtemplate {
 	requires transitive javafx.graphics;
 	requires transitive util.config;
 	requires transitive util.logging.console;
-	
 
 }

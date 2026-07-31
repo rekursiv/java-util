@@ -1,2 +1,18 @@
-bin/
+# IntelliJ IDEA project files
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Gradle build output and cache
+.gradle/
+build/
+
+# config files
 *config.js
+
+# Eclipse
+bin/
+
+
