@@ -3,19 +3,19 @@ module util.fxtemplate {
 	exports util.fxtemplate;
 	opens util.fxtemplate;
 
+	requires java.desktop;
+	requires java.logging;
+	requires javafx.base;
+	requires javafx.controls;
+	requires javafx.fxml;
+	requires javafx.graphics;
 	requires junique;
-	requires java.inject;
-	requires transitive com.fasterxml.jackson.annotation;
 	requires com.google.common;
 	requires com.google.guice;
-	requires transitive com.cathive.fx.guice;
-	requires transitive jakarta.inject;
-	requires transitive java.desktop;
-	requires transitive java.logging;
-	requires transitive javafx.base;
-	requires transitive javafx.controls;
-	requires transitive javafx.fxml;
-	requires transitive javafx.graphics;
+	requires com.cathive.fx.guice;
+	requires jakarta.inject;
+	requires java.inject;
+	requires com.fasterxml.jackson.annotation;
 	requires transitive util.config;
 	requires transitive util.logging.console;
 

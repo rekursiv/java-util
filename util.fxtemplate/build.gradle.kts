@@ -1,7 +1,7 @@
 
 plugins {
-    id("java")
-    application // Required to tell Gradle which class runs the app
+    java
+    application
     id("org.openjfx.javafxplugin") version "0.1.0"
     id("org.gradlex.extra-java-module-info") version "1.8"
 }
@@ -40,7 +40,7 @@ dependencies {
 
 extraJavaModuleInfo {
     failOnMissingModuleInfo = false
-    automaticModule("it.sauronsoftware:junique", "junique")
+    deriveAutomaticModuleNamesFromFileNames = true
     automaticModule("javax.inject:javax.inject", "java.inject")
     module("com.cathive.fx:fx-guice", "com.cathive.fx.guice") {
         exports("com.cathive.fx.guice")
@@ -60,4 +60,33 @@ javafx {
 application {
     mainClass.set("util.fxtemplate.Main")
     applicationDefaultJvmArgs = listOf("--enable-native-access=javafx.graphics")
+}
+
+val copyLibs = tasks.register<Copy>("copyLibs") {
+    description = "Emulates Eclipse-style JAR export with required libraries in sub-folder"
+    // Copy all dependencies INCLUDING JavaFX
+    // from(configurations.runtimeClasspath)
+
+    // Copy all dependencies EXCEPT JavaFX
+    from(configurations.runtimeClasspath.get().filter { file ->
+        !file.name.contains("javafx")
+    })
+
+    into(layout.buildDirectory.dir("libs/template_lib"))
+}
+
+tasks.named<Jar>("jar") {
+    archiveFileName.set("template.jar")
+    dependsOn(copyLibs) // Ensures lib folder is created every time you build
+
+    manifest {
+        attributes(
+            "Main-Class" to application.mainClass.get(),
+            "Class-Path" to provider {
+                configurations.runtimeClasspath.get().files.joinToString(" ") { file ->
+                    "template_lib/${file.name}"
+                }
+            }
+        )
+    }
 }

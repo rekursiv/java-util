@@ -2,5 +2,6 @@
 
 rootProject.name = "java-util"
 
-include("util.config", "util.logging.console", "util.fxtemplate")
-
+include(":util.config")
+include(":util.logging.console")
+include(":util.fxtemplate")
