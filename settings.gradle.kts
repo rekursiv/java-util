@@ -1,11 +1,13 @@
 
-
 rootProject.name = "java-util"
 
-//includeBuild("../org.ektorp")
-
 include(":util.config")
-include(":util.logging.console")
+include(":util.config.test")
 include(":util.db")
-
+include(":util.fx.entry")
+include(":util.fx.timelinegraph")
 include(":util.fxtemplate")
+include(":util.fxtemplate.builder")
+include(":util.logging.console")
+include(":util.logging.eb")
+

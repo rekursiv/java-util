@@ -3,8 +3,8 @@ guice = "7.0.0"
 guava = "33.0.0-jre"
 jackson = "2.17.0"
 fx-guice = "8.0.0"
-slf4j = "1.6.4"
 junique = "1.0.4"
+controlsfx = "11.2.4"
 
 [libraries]
 google-guice = { group = "com.google.inject", name = "guice", version.ref = "guice" }
@@ -13,6 +13,5 @@ jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-datab
 jackson-core = { group = "com.fasterxml.jackson.core", name = "jackson-core", version.ref = "jackson" }
 jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jackson" }
 fx-guice = { group = "com.cathive.fx", name = "fx-guice", version.ref = "fx-guice" }
-slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
 junique = { group = "it.sauronsoftware", name = "junique", version.ref = "junique" }
-
+controlsfx = { group = "org.controlsfx", name = "controlsfx", version.ref = "controlsfx" }

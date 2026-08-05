@@ -5,7 +5,7 @@ module util.fx.timelinegraph {
 	requires transitive com.google.common;
 	requires transitive com.google.guice;
 	requires transitive jakarta.inject;
-	requires transitive fx.guice;
+	requires transitive com.cathive.fx.guice;
 	requires transitive java.desktop;
 	requires transitive java.logging;
 	requires transitive javafx.base;
