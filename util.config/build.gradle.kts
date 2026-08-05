@@ -1,15 +1,6 @@
 
 plugins { java }
 
-
-sourceSets {
-    main {
-        java {
-            srcDir("src")
-        }
-    }
-}
-
 repositories {
     mavenCentral()
 }

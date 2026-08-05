@@ -6,17 +6,7 @@ plugins {
     id("org.gradlex.extra-java-module-info") version "1.8"
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir("src")
-        }
-        resources {
-            srcDir("src") // Tells Gradle your FXML files live side-by-side with your Java files
-            include("**/*.fxml", "**/*.css", "**/*.properties")
-        }
-    }
-}
+val appName = project.name.substringAfterLast('.')
 
 repositories {
     mavenCentral()
@@ -58,7 +48,7 @@ javafx {
 }
 
 application {
-    mainClass.set("util.fxtemplate.Main")
+    mainClass.set("${project.name}.Main")
     applicationDefaultJvmArgs = listOf("--enable-native-access=javafx.graphics")
 }
 
@@ -72,11 +62,11 @@ val copyLibs = tasks.register<Copy>("copyLibs") {
         !file.name.contains("javafx")
     })
 
-    into(layout.buildDirectory.dir("libs/template_lib"))
+    into(layout.buildDirectory.dir("libs/${appName}_lib"))
 }
 
 tasks.named<Jar>("jar") {
-    archiveFileName.set("template.jar")
+    archiveFileName.set("${appName}.jar")
     dependsOn(copyLibs) // Ensures lib folder is created every time you build
 
     manifest {
@@ -84,7 +74,7 @@ tasks.named<Jar>("jar") {
             "Main-Class" to application.mainClass.get(),
             "Class-Path" to provider {
                 configurations.runtimeClasspath.get().files.joinToString(" ") { file ->
-                    "template_lib/${file.name}"
+                    "${appName}_lib/${file.name}"
                 }
             }
         )
