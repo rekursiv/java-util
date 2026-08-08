@@ -23,7 +23,7 @@ dependencies {
     implementation(libs.jackson.core)
     implementation(libs.jackson.annotations)
     implementation(libs.fx.guice)
-    implementation((libs.controlsfx))
+    implementation(libs.controlsfx)
 }
 
 extraJavaModuleInfo {
