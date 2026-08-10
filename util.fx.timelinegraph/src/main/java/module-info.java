@@ -2,16 +2,15 @@ module util.fx.timelinegraph {
 	exports util.fx.timelinegraph;
 	opens util.fx.timelinegraph;
 
-	requires transitive com.google.common;
-	requires transitive com.google.guice;
-	requires transitive jakarta.inject;
-	requires transitive com.cathive.fx.guice;
-	requires transitive java.desktop;
-	requires transitive java.logging;
-	requires transitive javafx.base;
-	requires transitive javafx.controls;
-	requires transitive javafx.fxml;
-	requires transitive javafx.graphics;
-	requires transitive org.controlsfx.controls;
-	requires transitive util.logging.console;
+	requires com.google.common;
+	requires com.google.guice;
+	requires com.cathive.fx.guice;
+	requires java.desktop;
+	requires java.logging;
+	requires javafx.base;
+	requires javafx.controls;
+	requires javafx.fxml;
+	requires javafx.graphics;
+	requires org.controlsfx.controls;
+	requires util.logging.console;
 }

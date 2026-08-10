@@ -29,7 +29,6 @@ dependencies {
 extraJavaModuleInfo {
     failOnMissingModuleInfo = false
     deriveAutomaticModuleNamesFromFileNames = true
-    automaticModule("javax.inject:javax.inject", "java.inject")
     module("com.cathive.fx:fx-guice", "com.cathive.fx.guice") {
         exports("com.cathive.fx.guice")
         requires("com.google.guice")
