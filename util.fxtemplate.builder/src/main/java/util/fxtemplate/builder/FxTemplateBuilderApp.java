@@ -11,23 +11,30 @@ public class FxTemplateBuilderApp {
 	
 	private static final String filePrefix = "Test";
 	
-//	private static final String packageName = "com.protoplant.mixer";
+	private static final String packageName = "com.protoplant.mixer";
 //	private static final String destFolder = "../../protoplant_java/";
+	private static final String destFolder = "../../spike/";
 
-	private static final String packageName = "prj.test";
-	private static final String destFolder = "../../prj/";
+//	private static final String packageName = "prj.test";
+//	private static final String destFolder = "../../prj/";
 	
 	private static FxTemplateBuilderApp instance = null;
 
 	private Path tmpPrjPath = null;
+	private Path tmpJavPath = null;
 	private Path tmpSrcPath = null;
+	private Path tmpRscPath = null;
+
 	private Path newPrjPath = null;
+	private Path newJavPath = null;
 	private Path newSrcPath = null;
+	private Path newRscPath = null;
 	
 	public static void main(String[] args) {
 		if (enabled) {
 			instance = new FxTemplateBuilderApp();
 			try {
+				instance.setup();
 				instance.build();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -37,39 +44,47 @@ public class FxTemplateBuilderApp {
 		}
 	}
 
+	public void setup() throws Exception {
+		tmpPrjPath = Paths.get("../util.fxtemplate");
+		tmpJavPath = Paths.get(tmpPrjPath + "/src/main/java");
+		tmpSrcPath = Paths.get(tmpJavPath + "/util/fxtemplate");
+		tmpRscPath = Paths.get(tmpPrjPath + "/src/main/resources/util/fxtemplate");
+
+		newPrjPath = Paths.get(destFolder+packageName);
+		newJavPath = Paths.get(newPrjPath + "/src/main/java");
+		newSrcPath = Paths.get(newJavPath + "/" + packageName.replace('.', '/'));
+		newRscPath = Paths.get(newPrjPath + "/src/main/resources/" + packageName.replace('.', '/'));
+
+		System.out.println("From:  " + tmpPrjPath + "    " + tmpJavPath + "    " + tmpSrcPath + "    " + tmpRscPath);
+		System.out.println("  To:  " + newPrjPath + "    " + newJavPath + "    " + newSrcPath + "    " + newRscPath);
+	}
+
 	
 	public void build() throws Exception {
-		tmpPrjPath = Paths.get("../util.fxtemplate/");
-		tmpSrcPath = Paths.get("../util.fxtemplate/src/util/fxtemplate/");
-		newPrjPath = Paths.get(destFolder+packageName);
-		newSrcPath = newPrjPath.resolve("src/"+packageName.replace(".", "/"));
-
-
 		System.out.println("Creating directories...");
 		
-		Files.createDirectory(newPrjPath);
-		Files.createDirectory(newPrjPath.resolve("bin"));
 		Files.createDirectories(newSrcPath);
-		
-		
+		Files.createDirectories(newRscPath);
+
 		System.out.println("Copying files...");
 		
-		copyAndReplacePackageNameInPrj(".project");
-		copyAndReplacePackageNameInPrj("build.fxbuild");
-		
-		copyInPrj(".classpath");
+		copyInPrj("build.gradle.kts");  //  TODO:  replace `project("` with `"java-util`
 		copyInPrj("todo.txt");
 
-		copyAndReplacePackageNameInPrj("src/module-info.java");
-		
-		copyAndReplacePackageNameInSrc("Root.fxml");
+		copyAndReplacePackageNameInJav("module-info.java");
+
+		copyAndReplacePackageNameInSrc("Main.java");
 		copyAndReplacePackageNameInSrc("RootController.java");
 		copyAndReplacePackageNameInSrc("TemplateApp.java", filePrefix+"App.java");
 		copyAndReplacePackageNameInSrc("TemplateGuice.java", filePrefix+"Guice.java");
 		copyAndReplacePackageNameInSrc("TemplateConfig.java", filePrefix+"Config.java");
-		
-		copyInSrc("application.css");
+
+		copyAndReplacePackageNameInRsc("Root.fxml");
+		copyInRsc("application.css");
+
+
 		System.out.println("Done.");
+
 	}
 
 	
@@ -81,9 +96,13 @@ public class FxTemplateBuilderApp {
 	private void copyInSrc(String fileName) throws Exception {
 		Files.copy(tmpSrcPath.resolve(fileName), newSrcPath.resolve(fileName));
 	}
+
+	private void copyInRsc(String fileName) throws Exception {
+		Files.copy(tmpRscPath.resolve(fileName), newRscPath.resolve(fileName));
+	}
 	
-	private void copyAndReplacePackageNameInPrj(String fileName) throws Exception {
-		copyAndReplacePackageName(tmpPrjPath.resolve(fileName), newPrjPath.resolve(fileName), false);
+	private void copyAndReplacePackageNameInJav(String fileName) throws Exception {
+		copyAndReplacePackageName(tmpJavPath.resolve(fileName), newJavPath.resolve(fileName), false);
 	}
 	
 	private void copyAndReplacePackageNameInSrc(String fileName) throws Exception {
@@ -92,6 +111,10 @@ public class FxTemplateBuilderApp {
 	
 	private void copyAndReplacePackageNameInSrc(String oldFileName, String newFileName) throws Exception {
 		copyAndReplacePackageName(tmpSrcPath.resolve(oldFileName), newSrcPath.resolve(newFileName), true);
+	}
+
+	private void copyAndReplacePackageNameInRsc(String fileName) throws Exception {
+		copyAndReplacePackageName(tmpRscPath.resolve(fileName), newRscPath.resolve(fileName), false);
 	}
 	
 	private void copyAndReplacePackageName(Path src, Path dst, boolean replaceFileName) throws Exception {
