@@ -1,0 +1,4 @@
+
+new project in proj folder will need BOTH:
+  proj/settings.gradle.kts
+  proj/gradle/libs.versions.toml

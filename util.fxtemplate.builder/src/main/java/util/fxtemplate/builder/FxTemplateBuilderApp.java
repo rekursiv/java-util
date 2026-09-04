@@ -11,9 +11,9 @@ public class FxTemplateBuilderApp {
 	
 	private static final String filePrefix = "Test";
 	
-	private static final String packageName = "com.protoplant.mixer";
+	private static final String packageName = "spike.test";
 //	private static final String destFolder = "../../protoplant_java/";
-	private static final String destFolder = "../../spike/";
+	private static final String destFolder = "../../../spike/";
 
 //	private static final String packageName = "prj.test";
 //	private static final String destFolder = "../../prj/";
@@ -67,14 +67,14 @@ public class FxTemplateBuilderApp {
 		Files.createDirectories(newRscPath);
 
 		System.out.println("Copying files...");
-		
-		copyInPrj("build.gradle.kts");  //  TODO:  replace `project("` with `"java-util`
+
+		copyAndFixGradle("build.gradle.kts");
 		copyInPrj("todo.txt");
 
 		copyAndReplacePackageNameInJav("module-info.java");
 
-		copyAndReplacePackageNameInSrc("Main.java");
-		copyAndReplacePackageNameInSrc("RootController.java");
+		copyAndReplacePackageNameInSrc("Main.java", true);
+		copyAndReplacePackageNameInSrc("RootController.java", false);
 		copyAndReplacePackageNameInSrc("TemplateApp.java", filePrefix+"App.java");
 		copyAndReplacePackageNameInSrc("TemplateGuice.java", filePrefix+"Guice.java");
 		copyAndReplacePackageNameInSrc("TemplateConfig.java", filePrefix+"Config.java");
@@ -105,8 +105,8 @@ public class FxTemplateBuilderApp {
 		copyAndReplacePackageName(tmpJavPath.resolve(fileName), newJavPath.resolve(fileName), false);
 	}
 	
-	private void copyAndReplacePackageNameInSrc(String fileName) throws Exception {
-		copyAndReplacePackageName(tmpSrcPath.resolve(fileName), newSrcPath.resolve(fileName), false);
+	private void copyAndReplacePackageNameInSrc(String fileName, boolean replaceFileName) throws Exception {
+		copyAndReplacePackageName(tmpSrcPath.resolve(fileName), newSrcPath.resolve(fileName), replaceFileName);
 	}
 	
 	private void copyAndReplacePackageNameInSrc(String oldFileName, String newFileName) throws Exception {
@@ -120,8 +120,16 @@ public class FxTemplateBuilderApp {
 	private void copyAndReplacePackageName(Path src, Path dst, boolean replaceFileName) throws Exception {
 		Charset charset = StandardCharsets.UTF_8;
 		String content = new String(Files.readAllBytes(src), charset);
-		content = content.replaceAll("util.fxtemplate", packageName);
-		if (replaceFileName) content = content.replaceAll("Template", filePrefix);
+		content = content.replace("util.fxtemplate", packageName);
+		if (replaceFileName) content = content.replace("Template", filePrefix);
 		Files.write(dst, content.getBytes(charset));
+	}
+
+	private void copyAndFixGradle(String fileName) throws Exception {
+		Charset charset = StandardCharsets.UTF_8;
+		String content = new String(Files.readAllBytes(tmpPrjPath.resolve(fileName)), charset);
+		content = content.replace("implementation(project(\":util.config\"))", "implementation(\"java-util:util.config\")");
+		content = content.replace("implementation(project(\":util.logging.console\"))", "implementation(\"java-util:util.logging.console\")");
+		Files.write(newPrjPath.resolve(fileName), content.getBytes(charset));
 	}
 }
