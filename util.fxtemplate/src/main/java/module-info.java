@@ -16,7 +16,7 @@ module util.fxtemplate {
 	requires jakarta.inject;
 	requires java.inject;
 	requires com.fasterxml.jackson.annotation;
-	requires transitive util.config;
-	requires transitive util.logging.console;
+	requires util.config;
+	requires util.logging.console;
 
 }

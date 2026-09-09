@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 public class FxTemplateBuilderApp {
 	private static final boolean enabled = false;
 	
-	private static final String filePrefix = "Test";
+	private static final String filePrefix = "WebKit";
 	
-	private static final String packageName = "spike.test";
+	private static final String packageName = "spike.webkit";
 //	private static final String destFolder = "../../protoplant_java/";
 	private static final String destFolder = "../../../spike/";
 
